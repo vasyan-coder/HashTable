@@ -7,19 +7,13 @@
 using namespace std;
 
 class HashTableManage {
-	int M; // длина таблицы
+protected:
+	int M = 10; // длина таблицы
 	int N = 0; // количество закрытых адресов таблицы
 	int count_del_el = 0; // количество удаленных элементов таблицы
 
 public:
-	HashEl* values; // hash таблица
-
-public:
-	HashTableManage(int M = 10) {
-		this->M = M;
-		values = new HashEl[M];
-	}
-	
+	HashEl* values = new HashEl[M]; // hash таблица	
 
 
 public:
@@ -27,18 +21,18 @@ public:
 	int hash(int id, int len) { return id % len; }
 
 	// вставка в хеш-таблицу
-	void insertInHashTable(HashEl el, HashTableManage &table) {
-		int index = hash(el.num_train, table.M);
+	void insertInHashTable(HashEl el) {
+		int index = hash(el.num_train, this->M);
 
 		// обработка коллизии (двойное хеширование)
 		// если адрес закрыт
-		if (!table.values[index].Popen)
-			index = hash(index + index / table.M, table.M);
+		if (!this->values[index].Popen)
+			index = hash(index + index / this->M, this->M);
 
-		if (index < table.M) {
-			table.values[index] = el;
-			table.N = table.N + 1;
-			table.values[index].Popen = false;
+		if (index < this->M) {
+			this->values[index] = el;
+			this->N = this->N + 1;
+			this->values[index].Popen = false;
 		}
 	}
 
@@ -67,14 +61,16 @@ public:
 		count_del_el += 1;
 	}
 
-	void rehash(HashTableManage& table) {
+	void rehash() {
 		HashEl *temp = new HashEl[M*2];
 		for (int i = 0; i < M; i++)
-			temp[i] = table.values[i];
+			temp[i] = this->values[i];
 		
 		M *= 2;
 		delete[] values;
-		values = temp;
+		for (int i = 0; i < M * 2; i++) {
+			insertInHashTable(temp[i]);
+		}
 	}
 
 	void print(HashTableManage& table) {

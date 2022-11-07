@@ -5,7 +5,7 @@ using namespace std;
 
 class FileBinManage {
 public:
-    int CreateBinFile(string nametf, string namebf) {
+    virtual int CreateBinFile(string nametf, string namebf) {
         ifstream itf(nametf);
         if (!itf) return 1;
         fstream bf(namebf, ios::binary | ios::out); //поток дл€ записи в бинарный файл
@@ -55,8 +55,7 @@ public:
         bf.close();
         return -1; // запись с данные номером не найдена
     }
-    virtual int directAccess_to_the_railwayInBinFile(string namebf, int numTrain, HashEl& r) {
-
+    int directAccess_to_the_railwayInBinFile(string namebf, int numTrain, HashEl& r) {
         fstream bf(namebf, ios::binary | ios::in);
         int kod;
         if (bf.is_open()) {
@@ -116,7 +115,7 @@ public:
     }
     // 1 доп. задание
     // —формировать справку по поездам, отправл€ющимс€ в указанный пункт назначени€. –езультаты записать в новый двоичный файл такой же структуры, как и исходный.
-    virtual int reference_city_end(string namebf, string nametf, char end_place[20]) {
+    int reference_city_end(string namebf, string nametf, char end_place[20]) {
         //vector<HashEl> vector_file;
         //fstream bf(namebf, ios::binary | ios::in); // поток дл€ чтени€ из бинарного файла
         //if (!bf) return 1;

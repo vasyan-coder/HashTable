@@ -11,54 +11,58 @@ using namespace std;
 
 int main() {
     setlocale(LC_ALL, "ru");
+    
+    HashBin hb;
 
-    HashTableManage table(10);
-    HashEl el;
+    hb.CreateBinFile("test.txt", "test.bin");
 
-    fstream file("test.txt");
+    //HashTableManage table;
+    //HashEl el;
 
-    int num;
-    bool Popen;
-    bool Pdel;
+    //fstream file("test.txt");
 
-    char start_place[20];
-    char end_place[20];
-    char time[20];
+    //int num;
+    //bool Popen;
+    //bool Pdel;
 
-    if (!file) return 1;
+    //char start_place[20];
+    //char end_place[20];
+    //char time[20];
 
-    file >> num;
-    el.num_train = num;
-    file >> Popen;
-    el.Popen = Popen;
-    file >> Pdel;
-    el.Pdel = Pdel;
-    file.get();
-    file.getline(el.start_place, 20, '\n');
-    file.getline(el.end_place, 20, '\n');
-    file.getline(el.time, 20, '\n');
-    table.insertInHashTable(el, table);
-    while (!file.eof()) {
-        file >> num;
-        el.num_train = num;
-        file >> Popen;
-        el.Popen = Popen;
-        file >> Pdel;
-        el.Pdel = Pdel;
-        file.get();
-        file.getline(el.start_place, 20, '\n');
-        file.getline(el.end_place, 20, '\n');
-        file.getline(el.time, 20, '\n');
-        table.insertInHashTable(el, table);
-    }
+    //if (!file) return 1;
 
-    table.delFromHashTable(10, table);
+    //file >> num;
+    //el.num_train = num;
+    //file >> Popen;
+    //el.Popen = Popen;
+    //file >> Pdel;
+    //el.Pdel = Pdel;
+    //file.get();
+    //file.getline(el.start_place, 20, '\n');
+    //file.getline(el.end_place, 20, '\n');
+    //file.getline(el.time, 20, '\n');
+    //table.insertInHashTable(el);
+    //while (!file.eof()) {
+    //    file >> num;
+    //    el.num_train = num;
+    //    file >> Popen;
+    //    el.Popen = Popen;
+    //    file >> Pdel;
+    //    el.Pdel = Pdel;
+    //    file.get();
+    //    file.getline(el.start_place, 20, '\n');
+    //    file.getline(el.end_place, 20, '\n');
+    //    file.getline(el.time, 20, '\n');
+    //    table.insertInHashTable(el);
+    //}
 
-    table.rehash(table);
+    //table.delFromHashTable(10, table);
 
-    table.print(table);
+    //table.rehash();
 
-    cout << table.find_value(table, 11) << '\n';
+    //table.print(table);
+
+    //cout << table.find_value(table, 11) << '\n';
 
     return 0;
 }
