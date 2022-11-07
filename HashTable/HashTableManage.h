@@ -37,27 +37,27 @@ public:
 	}
 
 	// вернуть значение
-	int find_value(HashTableManage& table, int key) {
-		int i = hash(key, table.M);
+	int find_value(int key) {
+		int i = hash(key, this->M);
 		
-		while (!table.values[i].Pdel && table.values[i].Popen && table.values[i].num_train != key) {
+		while (!this->values[i].Pdel && this->values[i].Popen && this->values[i].num_train != key) {
 			i++;
 		}
-		if (table.values[i].Pdel && table.values[i].Popen)
+		if (this->values[i].Pdel && this->values[i].Popen)
 			return -1; // если элемент имеет признаки записи и удаления
 		else
 			return i; // смещение
 	}
 
 	// удаление из хеш-таблицы
-	void delFromHashTable(int key, HashTableManage& table) {
-		int index = find_value(table, key);
-		table.values[index].Popen = true;
-		table.values[index].Pdel = true;
-		table.values[index].num_train = NULL;
-		memset(table.values[index].start_place, 0, sizeof(table.values[index].start_place));
-		memset(table.values[index].end_place, 0, sizeof(table.values[index].end_place));
-		memset(table.values[index].time, 0, sizeof(table.values[index].time));
+	void delFromHashTable(int key) {
+		int index = find_value(key);
+		this->values[index].Popen = true;
+		this->values[index].Pdel = true;
+		this->values[index].num_train = NULL;
+		memset(this->values[index].start_place, 0, sizeof(this->values[index].start_place));
+		memset(this->values[index].end_place, 0, sizeof(this->values[index].end_place));
+		memset(this->values[index].time, 0, sizeof(this->values[index].time));
 		count_del_el += 1;
 	}
 

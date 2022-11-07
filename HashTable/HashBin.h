@@ -8,6 +8,7 @@ using namespace std;
 class HashBin : public FileBinManage, public HashTableManage {
     
 public:
+
     int CreateBinFile(string nametf, string namebf) {
         ifstream itf(nametf);
         if (!itf) return 1;
@@ -75,7 +76,7 @@ public:
         bf.read((char*)&r, len);
         vector_file.push_back(r);
         bf.close();
-
+        delFromHashTable(num_train);
         fstream bf2(namebf, ios::binary | ios::out); //поток для записи в бинарный файл
         for (int i = 0; i < vector_file.size(); i++)
             bf2.write((char*)&vector_file[i], sizeof(HashEl)); // 1 - откуда писать, 2 - сколько писать
@@ -85,7 +86,35 @@ public:
     }
 
     int testHeshT() {
+        HashTableManage table;
+        HashEl el;
 
+        string file_name = "test.bin";
+
+        CreateBinFile("test.txt", file_name);
+
+        cout << "searchKeyInBinFIle(file_name, 111)" << '\n';
+        cout << searchKeyInBinFIle(file_name, 111) << '\n';
+        cout << "delete_railwayHash(file_name, 111)" << '\n';
+        cout << delete_railwayHash(file_name, 111) << '\n';
+
+        cout << "find_value(11)" << '\n';
+        cout << find_value(11) << '\n';
+
+        delFromHashTable(11);
+
+        HashEl el;
+        el.num_train = 10213;
+        el.Popen = true;
+        el.Pdel = false;
+        strcpy(el.start_place, "Magadan");
+        strcpy(el.end_place, "Tver");
+        strcpy(el.time, "10:00");
+
+        insertInHashTable(el);
+        cout << "\nInsert " << el.num_train << " is done\n";
+
+        return 0;
     }
 
 };

@@ -14,7 +14,7 @@ int main() {
     
     HashBin hb;
 
-    hb.CreateBinFile("test.txt", "test.bin");
+    hb.testHeshT();
 
     //HashTableManage table;
     //HashEl el;
