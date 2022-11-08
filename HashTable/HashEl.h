@@ -7,8 +7,8 @@
 class HashEl {
 public:
 	int num_train;         // ключ
-	bool Popen = true; // признак открытой дл€ вставки €чейки
-	bool Pdel = false; // признак удалени€
+	//bool Popen = true; // признак открытой дл€ вставки €чейки
+	//bool Pdel = false; // признак удалени€
 
 	char start_place[20];
 	char end_place[20];

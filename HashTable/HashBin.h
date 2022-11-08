@@ -17,10 +17,10 @@ public:
         int i = 0;
         while (!itf.eof()) {
             itf >> r.num_train;
-            itf.get(); // считывает 1 символ
-            itf >> r.Popen;
-            itf.get(); // считывает 1 символ
-            itf >> r.Pdel;
+            //itf.get(); // считывает 1 символ
+            //itf >> r.Popen;
+            //itf.get(); // считывает 1 символ
+            //itf >> r.Pdel;
             itf.get(); // считывает 1 символ
             itf.getline(r.start_place, 20, '\n'); // 2 параметр - максимальная длина, 3 параметр - разделитель
             itf.getline(r.end_place, 20, '\n');
@@ -29,7 +29,11 @@ public:
             if (i > M) {
                 rehash();
             }
-            values[i] = r;
+            Hash hash1;
+            hash1.num_train = hash(r.num_train, M);
+            hash1.Popen = true;
+            hash1.Pdel = false;
+            values[i] = hash1;
             i++;
 
             bf.write((char*)&r, sizeof(HashEl)); // 1 - откуда писать, 2 - сколько писать
@@ -87,7 +91,7 @@ public:
 
     int testHeshT() {
         HashTableManage table;
-        HashEl el;
+        Hash el;
 
         string file_name = "test.bin";
 
@@ -103,13 +107,11 @@ public:
 
         delFromHashTable(11);
 
-        HashEl el;
-        el.num_train = 10213;
-        el.Popen = true;
-        el.Pdel = false;
-        strcpy(el.start_place, "Magadan");
-        strcpy(el.end_place, "Tver");
-        strcpy(el.time, "10:00");
+        HashEl el1;
+        el1.num_train = 10213;
+        strcpy(el1.start_place, "Magadan");
+        strcpy(el1.end_place, "Tver");
+        strcpy(el1.time, "10:00");
 
         insertInHashTable(el);
         cout << "\nInsert " << el.num_train << " is done\n";

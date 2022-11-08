@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileBinManage.h" />
+    <ClInclude Include="Hash.h" />
     <ClInclude Include="HashBin.h" />
     <ClInclude Include="HashEl.h" />
     <ClInclude Include="HashTableManage.h" />

@@ -12,10 +12,10 @@ public:
         HashEl r;
         while (!itf.eof()) {
             itf >> r.num_train;
-            itf.get(); // считывает 1 символ
-            itf >> r.Popen;
-            itf.get(); // считывает 1 символ
-            itf >> r.Pdel;
+            //itf.get(); // считывает 1 символ
+            //itf >> r.Popen;
+            //itf.get(); // считывает 1 символ
+            //itf >> r.Pdel;
             itf.get(); // считывает 1 символ
             itf.getline(r.start_place, 20, '\n'); // 2 параметр - максимальная длина, 3 параметр - разделитель
             itf.getline(r.end_place, 20, '\n');
